@@ -89,21 +89,29 @@ export function generateRecipientAddress(): string {
   // return ethers.Wallet.createRandom().address;
 }
 
+// takes in the amount to send to destination, and a list of recipients
 export async function sendTokenToDestChain(
   amount: string,
   recipientAddresses: string[],
   onSent: (txhash: string) => void,
 ) {
   // Get token address from the gateway contract
+  // this is obtained in order to create the erc20 token representation and approve spend from the source wallet
   const tokenAddress = await srcGatewayContract.tokenAddresses("aUSDC");
+  console.log("token address for aUSDC: ", tokenAddress);
 
+  // TODO: why can't we get matic?
+  const maticTokenAddress = await srcGatewayContract.tokenAddresses("WMATIC");
+  console.log("token addresses for matic: ", maticTokenAddress);
+
+  // contract of the token
   const erc20 = new Contract(
     tokenAddress,
     IERC20.abi,
     ethereumConnectedWallet,
   );
 
-  // Approve the token for the amount to be sent
+  // Approve the token for the amount to be sent from the wallet account at the source
   await erc20
     .approve(sourceContract.address, ethers.utils.parseUnits(amount, 6))
     .then((tx: any) => tx.wait());
