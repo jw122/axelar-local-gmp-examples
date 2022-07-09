@@ -16,33 +16,36 @@ let chains = isTestnet
 
 console.log("test net? ", isTestnet)
 // get chains
-const moonbeamChain = chains.find((chain: any) => chain.name === "Moonbeam");
+const polygonChain = chains.find((chain: any) => chain.name === "Polygon");
 const ethereumChain = chains.find((chain: any) => chain.name === "Ethereum");
 console.log("got ethereum chain: ", ethereumChain)
+console.log("got polygon chain: ", polygonChain)
 // deploy script
 async function main() {
   /**
-   * DEPLOY ON MOONBEAM
+   * DEPLOY ON POLYGON
    */
-  const moonbeamProvider = getDefaultProvider(moonbeamChain.rpc);
-  const moonbeamConnectedWallet = wallet.connect(moonbeamProvider);
-  const moonbeeamSender = await deployContract(
-    moonbeamConnectedWallet,
+  const polygonProvider = getDefaultProvider(polygonChain.rpc);
+  const polygonConnectedWallet = wallet.connect(polygonProvider);
+  console.log("polygon provider: ", polygonProvider);
+  console.log("polygon connected wallet: ", polygonConnectedWallet)
+  const polygonSender = await deployContract(
+    polygonConnectedWallet,
     MessageSenderContract,
-    [moonbeamChain.gateway, moonbeamChain.gasReceiver],
+    [polygonChain.gateway, polygonChain.gasReceiver],
   );
-  console.log("MessageSender deployed on Moonbeam:", moonbeeamSender.address);
-  moonbeamChain.messageSender = moonbeeamSender.address;
-  const moonbeamReceiver = await deployContract(
-    moonbeamConnectedWallet,
+  console.log("MessageSender deployed on Polygon:", polygonSender.address);
+  polygonChain.messageSender = polygonSender.address;
+  const polygonReceiver = await deployContract(
+    polygonConnectedWallet,
     MessageReceiverContract,
-    [moonbeamChain.gateway, moonbeamChain.gasReceiver],
+    [polygonChain.gateway, polygonChain.gasReceiver],
   );
   console.log(
-    "MessageReceiver deployed on Moonbeam:",
-    moonbeamReceiver.address,
+    "MessageReceiver deployed on polygon:",
+    polygonReceiver.address,
   );
-  moonbeamChain.messageReceiver = moonbeamReceiver.address;
+  polygonChain.messageReceiver = polygonReceiver.address;
 
   /**
    * DEPLOY ON ETHEREUM
@@ -68,7 +71,7 @@ async function main() {
   ethereumChain.messageReceiver = ethereumReceiver.address;
 
   // update chains
-  const updatedChains = [moonbeamChain,ethereumChain];
+  const updatedChains = [polygonChain,ethereumChain];
   if (isTestnet) {
     await fs.writeFile(
       "config/testnet.json",

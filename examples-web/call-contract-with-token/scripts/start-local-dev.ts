@@ -5,10 +5,10 @@ import { wallet } from "../config/constants";
 // deploy network
 createAndExport({
   accountsToFund: [wallet.address],
-  chains: ["Moonbeam", "Avalanche"],
+  chains: ["Ethereum", "Polygon"],
   chainOutputPath: "config/local.json",
   async callback(network: Network) {
-    if (network.name === "Avalanche") {
+    if (network.name === "Ethereum") {
       await network.giveToken(
         wallet.address,
         "aUSDC",

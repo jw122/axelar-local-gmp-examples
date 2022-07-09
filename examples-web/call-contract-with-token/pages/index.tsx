@@ -137,7 +137,7 @@ const Home: NextPage = () => {
               style={{ backgroundImage: "url('/assets/moonbeam.gif')" }}
             /> */}
             <div className="card-body">
-              <h2 className="card-title">Moonbeam (Token Receiver)</h2>
+              <h2 className="card-title">Polygon (Token Receiver)</h2>
               <div className="h-40">
                 <div className="w-full max-w-xs form-control">
                   <div>

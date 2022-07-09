@@ -15,23 +15,23 @@ let chains = isTestnet
   ? require("../config/testnet.json")
   : require("../config/local.json");
 
-const moonbeamChain = chains.find(
-  (chain: any) => chain.name === "Moonbeam",
+const polygonChain = chains.find(
+  (chain: any) => chain.name === "Polygon",
 ) as any;
 const ethereumChain = chains.find(
   (chain: any) => chain.name === "Ethereum",
 ) as any;
 
-if (!moonbeamChain || !ethereumChain) process.exit(0);
+if (!polygonChain || !ethereumChain) process.exit(0);
 
 const useMetamask = false; // typeof window === 'object';
 
-const moonbeamProvider = useMetamask
+const polygonProvider = useMetamask
   ? new providers.Web3Provider((window as any).ethereum)
-  : getDefaultProvider(moonbeamChain.rpc);
-const moonbeamConnectedWallet = useMetamask
-  ? (moonbeamProvider as providers.Web3Provider).getSigner()
-  : wallet.connect(moonbeamProvider);
+  : getDefaultProvider(polygonChain.rpc);
+const polygonConnectedWallet = useMetamask
+  ? (polygonProvider as providers.Web3Provider).getSigner()
+  : wallet.connect(polygonProvider);
 const ethereumProvider = getDefaultProvider(ethereumChain.rpc);
 const ethereumConnectedWallet = wallet.connect(ethereumProvider);
 
@@ -70,15 +70,15 @@ const sourceContract = new Contract(
 );
 
 const destContract = new Contract(
-  moonbeamChain.messageReceiver as string,
+  polygonChain.messageReceiver as string,
   MessageReceiverContract.abi,
-  moonbeamConnectedWallet,
+  polygonConnectedWallet,
 );
 
 const destGatewayContract = new Contract(
-  moonbeamChain.gateway,
+  polygonChain.gateway,
   gatewayAbi,
-  moonbeamConnectedWallet,
+  polygonConnectedWallet,
 );
 
 export function generateRecipientAddress(): string {
@@ -110,14 +110,14 @@ export async function sendTokenToDestChain(
   // Calculate how much gas to pay to Axelar to execute the transaction at the destination chain
   const gasFee = await api.estimateGasFee(
     EvmChain.ETHEREUM,
-    EvmChain.MOONBEAM,
-    GasToken.AVAX,
+    EvmChain.POLYGON,
+    GasToken.ETH,
   );
 
   // Send the token
   const receipt = await sourceContract
     .sendToMany(
-      "Moonbeam",
+      "Polygon",
       destContract.address,
       recipientAddresses,
       "aUSDC",
@@ -152,7 +152,7 @@ export async function getBalance(addresses: string[], isSource: boolean) {
   const contract = isSource ? srcGatewayContract : destGatewayContract;
   const connectedWallet = isSource
     ? ethereumConnectedWallet
-    : moonbeamConnectedWallet;
+    : polygonConnectedWallet;
   const tokenAddress = await contract.tokenAddresses("aUSDC");
   const erc20 = new Contract(tokenAddress, IERC20.abi, connectedWallet);
   const balances = await Promise.all(
