@@ -82,7 +82,8 @@ const destGatewayContract = new Contract(
 );
 
 export function generateRecipientAddress(): string {
-  return ethers.Wallet.createRandom().address;
+  return wallet.address;
+  // return ethers.Wallet.createRandom().address;
 }
 
 export async function sendTokenToDestChain(

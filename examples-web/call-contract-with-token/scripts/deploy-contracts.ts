@@ -14,6 +14,7 @@ let chains = isTestnet
   ? require("../config/testnet.json")
   : require("../config/local.json");
 
+console.log("test net? ", isTestnet)
 // get chains
 const moonbeamChain = chains.find((chain: any) => chain.name === "Moonbeam");
 const avalancheChain = chains.find((chain: any) => chain.name === "Avalanche");
