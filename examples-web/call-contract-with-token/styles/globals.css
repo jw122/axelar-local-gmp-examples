@@ -6,6 +6,15 @@ body {
   @apply bg-gray-50;
 }
 
+.swapCard {
+  border-radius: 15px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-width: 0px;
+  width: 65%;
+  margin-left: 20%;
+
+}
+
 /* https://codepen.io/YoannM/pen/yyExEO */
 .pixel, .pixel2 {
   color: white;
