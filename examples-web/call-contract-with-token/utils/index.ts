@@ -18,11 +18,11 @@ let chains = isTestnet
 const moonbeamChain = chains.find(
   (chain: any) => chain.name === "Moonbeam",
 ) as any;
-const avalancheChain = chains.find(
-  (chain: any) => chain.name === "Avalanche",
+const ethereumChain = chains.find(
+  (chain: any) => chain.name === "Ethereum",
 ) as any;
 
-if (!moonbeamChain || !avalancheChain) process.exit(0);
+if (!moonbeamChain || !ethereumChain) process.exit(0);
 
 const useMetamask = false; // typeof window === 'object';
 
@@ -32,8 +32,8 @@ const moonbeamProvider = useMetamask
 const moonbeamConnectedWallet = useMetamask
   ? (moonbeamProvider as providers.Web3Provider).getSigner()
   : wallet.connect(moonbeamProvider);
-const avalancheProvider = getDefaultProvider(avalancheChain.rpc);
-const avalancheConnectedWallet = wallet.connect(avalancheProvider);
+const ethereumProvider = getDefaultProvider(ethereumChain.rpc);
+const ethereumConnectedWallet = wallet.connect(ethereumProvider);
 
 const gatewayAbi = [
   {
@@ -58,15 +58,15 @@ const gatewayAbi = [
 ];
 
 const srcGatewayContract = new Contract(
-  avalancheChain.gateway,
+  ethereumChain.gateway,
   gatewayAbi,
-  avalancheConnectedWallet,
+  ethereumConnectedWallet,
 );
 
 const sourceContract = new Contract(
-  avalancheChain.messageSender as string,
+  ethereumChain.messageSender as string,
   MessageSenderContract.abi,
-  avalancheConnectedWallet,
+  ethereumConnectedWallet,
 );
 
 const destContract = new Contract(
@@ -97,7 +97,7 @@ export async function sendTokenToDestChain(
   const erc20 = new Contract(
     tokenAddress,
     IERC20.abi,
-    avalancheConnectedWallet,
+    ethereumConnectedWallet,
   );
 
   // Approve the token for the amount to be sent
@@ -109,7 +109,7 @@ export async function sendTokenToDestChain(
 
   // Calculate how much gas to pay to Axelar to execute the transaction at the destination chain
   const gasFee = await api.estimateGasFee(
-    EvmChain.AVALANCHE,
+    EvmChain.ETHEREUM,
     EvmChain.MOONBEAM,
     GasToken.AVAX,
   );
@@ -151,7 +151,7 @@ export function truncatedAddress(address: string): string {
 export async function getBalance(addresses: string[], isSource: boolean) {
   const contract = isSource ? srcGatewayContract : destGatewayContract;
   const connectedWallet = isSource
-    ? avalancheConnectedWallet
+    ? ethereumConnectedWallet
     : moonbeamConnectedWallet;
   const tokenAddress = await contract.tokenAddresses("aUSDC");
   const erc20 = new Contract(tokenAddress, IERC20.abi, connectedWallet);
