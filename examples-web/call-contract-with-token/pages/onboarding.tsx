@@ -9,12 +9,20 @@ import {
   truncatedAddress,
 } from "../utils";
 
+import { Button, Modal } from "react-bootstrap";
+
 const Home: NextPage = () => {
   const [recipientAddresses, setRecipientAddresses] = useState<string[]>([]);
   const [balances, setBalances] = useState<string[]>([]);
   const [senderBalance, setSenderBalance] = useState<string>();
   const [txhash, setTxhash] = useState<string>();
   const [loading, setLoading] = useState(false);
+
+  // modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(false);
 
   async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -65,9 +73,37 @@ const Home: NextPage = () => {
         <h2 className="text-base text-center">
           Instantly top up your Polygon wallet
         </h2>
-
         <div className="grid grid-cols-2 gap-20 mt-20 justify-items-center">
+          <Button variant="primary" onClick={handleShow}>
+            Launch static backdrop modal
+          </Button>
+
+          <Button>
+            <a href="/">Go home</a>
+          </Button>
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              I will not close if you click outside me. Don't even try to press
+              escape key.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary">Understood</Button>
+            </Modal.Footer>
+          </Modal>
           {/* ETHEREUM CARD */}
+
           <div className="row-span-2 shadow-xl card w-96 bg-base-100">
             {/* <figure
               className="h-64 bg-center bg-no-repeat bg-cover image-full"
@@ -137,7 +173,6 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-
           {/* Destination chain card */}
           <div className="row-span-1 shadow-xl card w-96 bg-base-100">
             {/* <figure

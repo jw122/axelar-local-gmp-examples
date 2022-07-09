@@ -59,14 +59,14 @@ const Home: NextPage = () => {
         <h2 className="text-base text-center">Call Contract With Token</h2>
 
         <div className="grid grid-cols-2 gap-20 mt-20 justify-items-center">
-          {/* ETHEREUM CARD */}
+          {/* AVALANCHE CARD */}
           <div className="row-span-2 shadow-xl card w-96 bg-base-100">
-            {/* <figure
+            <figure
               className="h-64 bg-center bg-no-repeat bg-cover image-full"
               style={{ backgroundImage: "url('/assets/avalanche.gif')" }}
-            /> */}
+            />
             <div className="card-body">
-              <h2 className="card-title">Ethereum (Token Sender)</h2>
+              <h2 className="card-title">Avalanche (Token Sender)</h2>
 
               <p>
                 Sender ({truncatedAddress(wallet.address)}) balance:{" "}
@@ -132,12 +132,12 @@ const Home: NextPage = () => {
 
           {/* Destination chain card */}
           <div className="row-span-1 shadow-xl card w-96 bg-base-100">
-            {/* <figure
+            <figure
               className="h-64 bg-center bg-no-repeat bg-cover image-full"
               style={{ backgroundImage: "url('/assets/moonbeam.gif')" }}
-            /> */}
+            />
             <div className="card-body">
-              <h2 className="card-title">Polygon (Token Receiver)</h2>
+              <h2 className="card-title">Moonbeam (Token Receiver)</h2>
               <div className="h-40">
                 <div className="w-full max-w-xs form-control">
                   <div>
@@ -155,12 +155,12 @@ const Home: NextPage = () => {
                   </div>
                 </div>
               </div>
-              <div
+              {/* <div
                 className="justify-center mt-5 card-actions"
                 onClick={handleRefreshDestBalances}
               >
                 <button className="btn btn-primary">Refresh Balances</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
