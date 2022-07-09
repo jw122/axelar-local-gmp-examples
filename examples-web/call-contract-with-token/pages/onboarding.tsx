@@ -54,8 +54,6 @@ const Home: NextPage = () => {
     <div
       style={{
         backgroundImage: "url('/assets/sunflower-land.png')",
-        // height: "300px",
-        // minHeight: "10%",
         height: "auto",
         position: "fixed",
         minWidth: "100%",

@@ -26,6 +26,7 @@ contract MessageSender {
         IERC20(tokenAddress).approve(address(gateway), amount);
         bytes memory payload = abi.encode(destinationAddresses);
         if (msg.value > 0) {
+            // Pay the AxelarGasService smart contract on the source chain
             gasReceiver.payNativeGasForContractCallWithToken{value: msg.value}(
                 address(this),
                 destinationChain,

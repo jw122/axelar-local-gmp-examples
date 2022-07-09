@@ -35,6 +35,7 @@ const polygonConnectedWallet = useMetamask
 const ethereumProvider = getDefaultProvider(ethereumChain.rpc);
 const ethereumConnectedWallet = wallet.connect(ethereumProvider);
 
+// Gateway contracts are deployed at the source and destination chains
 const gatewayAbi = [
   {
     inputs: [
@@ -58,10 +59,12 @@ const gatewayAbi = [
 ];
 
 const srcGatewayContract = new Contract(
-  ethereumChain.gateway,
-  gatewayAbi,
-  ethereumConnectedWallet,
+  ethereumChain.gateway, // address
+  gatewayAbi, // interface
+  ethereumConnectedWallet, // signer
 );
+
+console.log("source gateway contract: ", srcGatewayContract)
 
 const sourceContract = new Contract(
   ethereumChain.messageSender as string,
@@ -108,13 +111,16 @@ export async function sendTokenToDestChain(
   const api = new AxelarQueryAPI({ environment: Environment.TESTNET });
 
   // Calculate how much gas to pay to Axelar to execute the transaction at the destination chain
+  // Call the estimateGasFee method to get the sourceGasFee in the desired gas-payment token on the destination chain
   const gasFee = await api.estimateGasFee(
-    EvmChain.ETHEREUM,
-    EvmChain.POLYGON,
-    GasToken.ETH,
+    EvmChain.ETHEREUM, // source chain
+    EvmChain.POLYGON, // dest chain
+    GasToken.ETH, // source chain token symbol
   );
 
-  // Send the token
+  console.log("gas fee: ", gasFee)
+
+  // Send the token with the MessageSender contract (source)
   const receipt = await sourceContract
     .sendToMany(
       "Polygon",
@@ -122,6 +128,7 @@ export async function sendTokenToDestChain(
       recipientAddresses,
       "aUSDC",
       ethers.utils.parseUnits(amount, 6),
+      // The msg.value is the gas amount we pay to the AxelarGasService contract
       {
         value: BigInt(isTestnet ? gasFee : 3000000),
       },
