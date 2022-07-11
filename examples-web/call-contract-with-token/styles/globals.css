@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Quicksand:wght@300;400;600&family=VT323&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,8 +9,6 @@ body {
   @apply bg-gray-50;
 }
 
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
-
 .swapCard {
   border-radius: 15px !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -15,6 +16,14 @@ body {
   width: 65%;
   margin-left: 20%;
 
+}
+
+p, span {
+  font-family: 'DM Sans', sans-serif;
+}
+
+h2, h5 {
+  font-family: 'VT323', monospace;
 }
 
 /* https://codepen.io/YoannM/pen/yyExEO */

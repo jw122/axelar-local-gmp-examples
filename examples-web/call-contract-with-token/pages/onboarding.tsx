@@ -91,7 +91,6 @@ const Home: NextPage = () => {
                   Track at axelarscan
                 </a>
               )}
-              <hr></hr>
               <span className="font-bold">Destination Address</span>
               {recipientAddresses.map((recipientAddress) => (
                 <span key={recipientAddress} className="mt-1">
@@ -142,7 +141,9 @@ const Home: NextPage = () => {
                 </span>
               </h5>{" "}
               <div className="h-30">
-                <b>Balances</b>
+                <p>
+                  <b>Balances</b>
+                </p>
                 <div
                   className="w-full max-w-xs form-control"
                   style={{ borderWidth: "0px" }}
