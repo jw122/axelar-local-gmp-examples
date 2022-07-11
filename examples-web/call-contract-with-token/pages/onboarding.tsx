@@ -132,10 +132,21 @@ const Home: NextPage = () => {
               {" "}
               <h2 className="card-title">Destination</h2>
               <h5>
-                <span className="gradientText">Polygon</span>
+                <span className="gradientText">
+                  {" "}
+                  <img
+                    src="https://cryptologos.cc/logos/polygon-matic-logo.png"
+                    width="25px"
+                  ></img>
+                  Polygon
+                </span>
               </h5>{" "}
               <div className="h-30">
-                <div className="w-full max-w-xs form-control">
+                <b>Balances</b>
+                <div
+                  className="w-full max-w-xs form-control"
+                  style={{ borderWidth: "0px" }}
+                >
                   <div>
                     {recipientAddresses.map((recipientAddress, i) => (
                       <div
@@ -155,7 +166,12 @@ const Home: NextPage = () => {
                 className=" card-actions"
                 onClick={handleRefreshDestBalances}
               >
-                <button className="btn btn-primary">Refresh Balances</button>
+                <button
+                  className="btnHover color2"
+                  style={{ width: "140px", height: "45px", marginLeft: "0px" }}
+                >
+                  Refresh Balances
+                </button>
               </div>
             </Card.Body>
           </Card>
