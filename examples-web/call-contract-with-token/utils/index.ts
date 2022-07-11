@@ -159,7 +159,7 @@ export async function sendTokenToDestChain(
 
 export function truncatedAddress(address: string): string {
   return (
-    address.substring(0, 6) + "..." + address.substring(address.length - 4)
+    address.substring(0, 9) + "..." + address.substring(address.length - 4)
   );
 }
 

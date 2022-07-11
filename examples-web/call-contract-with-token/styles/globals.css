@@ -81,3 +81,35 @@ body {
   width: auto;
   z-index: 2;
 }
+
+
+.gradientText {
+  position: relative;
+}
+
+.gradientText::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 5px;
+  border-radius: 2px;
+  background: linear-gradient(111.3deg, #af5fff 9.6%, #0094d4 93.6%);
+}
+
+.gradientTextDark {
+  position: relative;
+}
+
+
+.gradientTextDark::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 5px;
+  border-radius: 2px;
+  background: linear-gradient(111.3deg, #565656 9.6%, #141515 93.6%);
+}

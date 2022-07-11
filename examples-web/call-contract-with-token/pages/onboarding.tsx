@@ -9,7 +9,7 @@ import {
   truncatedAddress,
 } from "../utils";
 
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Badge, Button } from "react-bootstrap";
 
 const Home: NextPage = () => {
   const [recipientAddresses, setRecipientAddresses] = useState<string[]>([]);
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
   return (
     <div
       style={{
-        backgroundImage: "url('/assets/sunflower-land.png')",
+        backgroundImage: "url('/assets/sunflower2.png')",
         height: "auto",
         position: "fixed",
         minWidth: "100%",
@@ -68,12 +68,17 @@ const Home: NextPage = () => {
           Instantly top up your Polygon wallet
         </h2> */}
 
-        <Card className="swapCard p-1 mb-5 bg-white">
+        <Card className="swapCard p-1 mb-3 bg-white">
           <Card.Body>
-            <h2 className="card-title">Ethereum</h2>
+            <h2 className="card-title">Source</h2>
 
-            <p>Sender ({truncatedAddress(wallet.address)})</p>
-            <p>balance: {senderBalance}</p>
+            <h5>
+              <span className="gradientTextDark">Ethereum</span>
+            </h5>
+            <p>
+              <b>Sender:</b> {truncatedAddress(wallet.address)} (<b>balance:</b>{" "}
+              {senderBalance})
+            </p>
 
             <form className="flex flex-col w-full" onSubmit={handleOnSubmit}>
               {txhash && isTestnet && (
@@ -85,22 +90,27 @@ const Home: NextPage = () => {
                   Track at axelarscan
                 </a>
               )}
-              <span className="mt-2 font-bold">Destination Address</span>
+              <hr></hr>
+              <span className="font-bold">Destination Address</span>
               {recipientAddresses.map((recipientAddress) => (
                 <span key={recipientAddress} className="mt-1">
                   {truncatedAddress(recipientAddress)}
                 </span>
               ))}
 
-              <button
+              <Button
+                style={{
+                  marginBottom: "3%",
+                  marginTop: "3%",
+                  width: "70%",
+                  height: "50%",
+                  backgroundColor: "green",
+                }}
                 onClick={handleOnGenerateRecipientAddress}
-                type="button"
-                className={cn("btn btn-accent mt-2", {
-                  loading,
-                })}
               >
-                Send to wallet on Polygon{" "}
-              </button>
+                {" "}
+                Send to same wallet on Polygon{" "}
+              </Button>
               <div className="flex">
                 <input
                   disabled={loading}
@@ -130,9 +140,9 @@ const Home: NextPage = () => {
             <Card.Body>
               {" "}
               <h2 className="card-title">Destination</h2>
-              <p>
-                <span className="badge badge-secondary">Polygon</span>
-              </p>
+              <h5>
+                <span className="gradientText">Polygon</span>
+              </h5>{" "}
               <div className="h-30">
                 <div className="w-full max-w-xs form-control">
                   <div>
