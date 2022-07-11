@@ -63,21 +63,22 @@ const Home: NextPage = () => {
       }}
     >
       <div className="container mt-10 justify-items-center">
-        {/* <h1 className="text-4xl font-medium text-center">Sunflower Land </h1>
-        <h2 className="text-base text-center">
-          Instantly top up your Polygon wallet
-        </h2> */}
-
         <Card className="swapCard p-1 mb-3 bg-white">
           <Card.Body>
             <h2 className="card-title">Source</h2>
 
             <h5>
-              <span className="gradientTextDark">Ethereum</span>
+              <span className="gradientTextDark">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png"
+                  width="15px"
+                ></img>
+                Ethereum
+              </span>
             </h5>
             <p>
               <b>Sender:</b> {truncatedAddress(wallet.address)} (<b>balance:</b>{" "}
-              {senderBalance})
+              {senderBalance} USDC)
             </p>
 
             <form className="flex flex-col w-full" onSubmit={handleOnSubmit}>
@@ -98,19 +99,16 @@ const Home: NextPage = () => {
                 </span>
               ))}
 
-              <Button
-                style={{
-                  marginBottom: "3%",
-                  marginTop: "3%",
-                  width: "70%",
-                  height: "50%",
-                  backgroundColor: "green",
-                }}
+              <div
+                style={{ marginTop: "3%", marginBottom: "3%" }}
                 onClick={handleOnGenerateRecipientAddress}
               >
-                {" "}
-                Send to same wallet on Polygon{" "}
-              </Button>
+                <Badge bg="dark">
+                  Send to same address on{" "}
+                  <span style={{ color: "rgb(180, 130, 255)" }}>Polygon</span>
+                </Badge>
+              </div>
+
               <div className="flex">
                 <input
                   disabled={loading}
@@ -120,14 +118,7 @@ const Home: NextPage = () => {
                   placeholder="Enter amount to send"
                   className="w-full max-w-xs input input-bordered"
                 />
-                <button
-                  className={cn("btn btn-primary ml-2", {
-                    loading,
-                    "opacity-30": loading || recipientAddresses.length === 0,
-                    "opacity-100": !loading && recipientAddresses.length > 0,
-                  })}
-                  type="submit"
-                >
+                <button className="btnHover color2" type="submit">
                   Send
                 </button>
               </div>
