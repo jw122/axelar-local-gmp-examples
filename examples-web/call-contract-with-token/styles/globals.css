@@ -22,19 +22,21 @@ p, span {
   font-family: 'DM Sans', sans-serif;
 }
 
-h2, h5 {
+h1, h2, h5 {
   font-family: 'VT323', monospace;
 }
 
+.sunflowerBanner {
+  margin-top: 15%;
+  margin-left: 20%;
+  font-family: 'DM Sans', sans-serif;
+}
 /* https://codepen.io/YoannM/pen/yyExEO */
 .pixel, .pixel2 {
   color: white;
   height: auto;
-  margin: 2px;
-  font-family: 'Arial';
+  margin: auto;
   
-  position: relative;
-  display: inline-block;
   vertical-align: top;
   text-transform: uppercase;
   
@@ -88,7 +90,7 @@ h2, h5 {
 .pixel2 {
   padding: 10px 10px;
   position: relative;
-  background: rgb(88, 0, 220);
+  background: rgb(114, 82, 0);
   width: auto;
   z-index: 2;
 }

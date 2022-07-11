@@ -2,7 +2,7 @@ import cn from "classnames";
 import type { NextPage } from "next";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Button, Modal, Card } from "react-bootstrap";
+import { Alert, Row, Col } from "react-bootstrap";
 
 const Home: NextPage = () => {
   return (
@@ -15,34 +15,64 @@ const Home: NextPage = () => {
         minHeight: "100%",
       }}
     >
-      <div>
-        <div
-          className="container justify-items-center"
-          style={{ marginTop: "40%", marginLeft: "25%" }}
-        >
-          <div className="pixel2">
+      <div className="container sunflowerBanner justify-items-right">
+        <Alert variant="warning" style={{ width: "70%", margin: "auto" }}>
+          <h1>Welcome to Sunflower Land!</h1>
+          <b>
+            From our{" "}
             <a
-              href="/onboarding"
-              style={{ color: "white", textDecoration: "none" }}
+              href="https://docs.sunflower-land.com/getting-started/getting-setup"
+              style={{ color: "green" }}
             >
-              <b>Play Game 🌻</b>
-            </a>
-          </div>
-          <div className="pixel2" style={{ marginLeft: "3%" }}>
-            <a
-              href="/onboarding"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              <b>Top up wallet 🪙</b>
-            </a>
-          </div>
-
-          {/* <Button variant="warning">
-            <a href="/onboarding" style={{ color: "white" }}>
-              Go home
-            </a>
-          </Button> */}
-        </div>
+              setup guide:
+            </a>{" "}
+          </b>
+          <p>
+            The game requires users to connect to the Polygon blockchain. Before
+            playing, you will also need to ensure that you have some $MATIC in
+            your wallet to fund your farm.
+          </p>
+          <p>
+            Each time you make a blockchain transaction you need to pay a small
+            amount of $MATIC to the Blockchain to secure your data.
+          </p>
+          To use on the Polygon network, you will first need to transfer these
+          tokens from the exchange (eg. Binance) onto the Polygon network. The
+          easiest way to achieve this is through Binance's recent Polygon Wallet
+          Integration. You can find this by going into the Withdraw section of
+          Binance.
+        </Alert>
+        <Row style={{ marginLeft: "15%", marginRight: "15%", marginTop: "5%" }}>
+          <Col>
+            <div className="pixel2">
+              <a
+                href="/onboarding"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "VT323",
+                }}
+              >
+                <b>Start Game 🌻</b>
+              </a>
+            </div>
+          </Col>
+          <Col>
+            {" "}
+            <div className="pixel2">
+              <a
+                href="/onboarding"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "VT323",
+                }}
+              >
+                <b>Top up wallet 🪙</b>
+              </a>
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );

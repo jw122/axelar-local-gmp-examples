@@ -78,7 +78,7 @@ const Home: NextPage = () => {
             </h5>
             <p>
               <b>Sender:</b> {truncatedAddress(wallet.address)} (<b>balance:</b>{" "}
-              {senderBalance} USDC)
+              {senderBalance})
             </p>
 
             <form className="flex flex-col w-full" onSubmit={handleOnSubmit}>
