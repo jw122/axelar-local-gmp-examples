@@ -22,7 +22,9 @@ const Home: NextPage = () => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    console.log("formData: ", formData);
     const amount = formData.get("amount") as string;
+    console.log("requested amount: ", amount);
     setLoading(true);
     await sendTokenToDestChain(amount, recipientAddresses, setTxhash).finally(
       () => {
@@ -82,15 +84,6 @@ const Home: NextPage = () => {
             </p>
 
             <form className="flex flex-col w-full" onSubmit={handleOnSubmit}>
-              {txhash && isTestnet && (
-                <a
-                  href={`https://testnet.axelarscan.io/gmp/${txhash}`}
-                  className="link link-accent mt-2"
-                  target="blank"
-                >
-                  Track at axelarscan
-                </a>
-              )}
               <span className="font-bold">Destination Address</span>
               {recipientAddresses.map((recipientAddress) => (
                 <span key={recipientAddress} className="mt-1">
@@ -107,6 +100,15 @@ const Home: NextPage = () => {
                   <span style={{ color: "rgb(180, 130, 255)" }}>Polygon</span>
                 </Badge>
               </div>
+              {txhash && isTestnet && (
+                <a
+                  href={`https://testnet.axelarscan.io/gmp/${txhash}`}
+                  className="link link-accent mt-2"
+                  target="blank"
+                >
+                  🔎 Transaction in progress. Track at axelarscan
+                </a>
+              )}
 
               <div className="flex">
                 <input

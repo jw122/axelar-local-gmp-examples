@@ -11,6 +11,8 @@ import MessageReceiverContract from "../artifacts/contracts/MessageReceiver.sol/
 import IERC20 from "../artifacts/@axelar-network/axelar-cgp-solidity/contracts/interfaces/IERC20.sol/IERC20.json";
 import { isTestnet, wallet } from "../config/constants";
 
+console.log("[index.ts] is testnet? ", isTestnet)
+
 let chains = isTestnet
   ? require("../config/testnet.json")
   : require("../config/local.json");
